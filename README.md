@@ -1,14 +1,16 @@
-# Nerfies
+# InfoDiffusion
 
-This is the repository that contains source code for the [Nerfies website](https://nerfies.github.io).
+This is the repository that contains source code for the [InfoDiffusion website](https://infodiffusion.github.io) that was built using the Academic Project Page Template which was adopted from [Nerfies website](https://nerfies.github.io).
 
-If you find Nerfies useful for your work please cite:
+If you find InfoDiffusion useful for your work please cite:
 ```
-@article{park2021nerfies
-  author    = {Park, Keunhong and Sinha, Utkarsh and Barron, Jonathan T. and Bouaziz, Sofien and Goldman, Dan B and Seitz, Steven M. and Martin-Brualla, Ricardo},
-  title     = {Nerfies: Deformable Neural Radiance Fields},
-  journal   = {ICCV},
-  year      = {2021},
+@inproceedings{wang2023infodiffusion,
+  title={Infodiffusion: Representation learning using information maximizing diffusion models},
+  author={Wang, Yingheng and Schiff, Yair and Gokaslan, Aaron and Pan, Weishen and Wang, Fei and De Sa, Christopher and Kuleshov, Volodymyr},
+  booktitle={International Conference on Machine Learning},
+  pages={36336--36354},
+  year={2023},
+  organization={PMLR}
 }
 ```
 
