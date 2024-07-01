@@ -1,4 +1,4 @@
-# InfoDiffusion
+# InfoDiffusion Webpage
 
 This is the repository that contains source code for the [InfoDiffusion website](https://isjakewong.github.io/infodiffusion-page) that was built using the Academic Project Page Template which was adopted from [Nerfies website](https://nerfies.github.io).
 
