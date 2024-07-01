@@ -42,45 +42,6 @@
 </head>
 <body>
 
-<nav class="navbar" role="navigation" aria-label="main navigation">
-  <div class="navbar-brand">
-    <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
-      <span aria-hidden="true"></span>
-      <span aria-hidden="true"></span>
-      <span aria-hidden="true"></span>
-    </a>
-  </div>
-  <div class="navbar-menu">
-    <div class="navbar-start" style="flex-grow: 1; justify-content: center;">
-      <a class="navbar-item" href="https://keunhong.com">
-      <span class="icon">
-          <i class="fas fa-home"></i>
-      </span>
-      </a>
-
-      <div class="navbar-item has-dropdown is-hoverable">
-        <a class="navbar-link">
-          More Research
-        </a>
-        <div class="navbar-dropdown">
-          <a class="navbar-item" href="https://hypernerf.github.io">
-            HyperNeRF
-          </a>
-          <a class="navbar-item" href="https://nerfies.github.io">
-            Nerfies
-          </a>
-          <a class="navbar-item" href="https://latentfusion.github.io">
-            LatentFusion
-          </a>
-          <a class="navbar-item" href="https://photoshape.github.io">
-            PhotoShape
-          </a>
-        </div>
-      </div>
-    </div>
-
-  </div>
-</nav>
 
 
 <section class="hero">
@@ -110,10 +71,24 @@
               <a href="https://www.cs.cornell.edu/~kuleshov/">Volodymyr Kuleshov</a>
             </span>
           </div>
-
+          
+          <div class="is-size-5 publication-authors">
+            <span class="author-block"></sup>Cornell University,</span>
+            <span class="author-block"></sup>Cornell Tech, NY</span>
+          </div>
+          
           <div class="column has-text-centered">
             <div class="publication-links">
               <!-- arXiv Link. -->
+              <span class="link-block">
+                <a href="https://proceedings.mlr.press/v202/wang23ah.html"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fas fa-file-pdf"></i>
+                  </span>
+                  <span>Paper</span>
+                </a>
+              </span>
               <span class="link-block">
                 <a href="https://arxiv.org/abs/2306.08757"
                    class="external-link button is-normal is-rounded is-dark">
@@ -145,6 +120,16 @@
 <section class="hero teaser">
   <div class="container is-max-desktop">
     <div class="hero-body">
+      <table style="width: 100%;">
+        <tr>
+          <td align="center" style="width: 50%;">
+            <img src="./static/imgs/flowchart.drawio-1.png" width="99%" alt="Flowchart">
+          </td>
+          <td align="center" style="width: 50%;">
+            <img src="./static/imgs/graphicalabstract.drawio_v2-1.png" width="99%" alt="Graphical Abstract">
+          </td>
+        </tr>
+      </table>
       <h2 class="subtitle has-text-centered">
         InfoDiffusion: A principled probabilistic extension of diffusion models that supports low-dimensional latents with associated variational learning objectives.
       </h2>
@@ -152,20 +137,6 @@
   </div>
 </section>
 
-<section class="hero is-light is-small">
-  <div class="hero-body">
-    <div class="container">
-      <div id="results-carousel" class="carousel results-carousel">
-        <div class="item item-info1">
-          <img src="./static/images/flowchart.drawio-1.png" alt="Flowchart">
-        </div>
-        <div class="item item-info2">
-          <img src="./static/images/graphicalabstract.drawio_v2-1.png" alt="Graphical Abstract">
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
 
 <section class="section">
   <div class="container is-max-desktop">
