@@ -41,6 +41,17 @@
   <script src="./static/js/bulma-carousel.min.js"></script>
   <script src="./static/js/bulma-slider.min.js"></script>
   <script src="./static/js/index.js"></script>
+
+  <style>
+      .equation-table {
+          border-collapse: collapse;
+          margin: 0 auto; /* Center align the table */
+      }
+      .equation-table td {
+          vertical-align: top; /* Align text at the top */
+          padding: 2px 5px; /* Add some padding for better readability */
+      }
+  </style>
 </head>
 <body>
 
@@ -319,11 +330,29 @@
       <p>
         where \(\mathcal{L}_D(\mathbf{x}_0)\) is from the denoising objective, and \(\zeta, \beta > 0\) are scalars controlling the regularization strength. We can rewrite this objective into a tractable form:
       </p>
-      <div style="text-align: center;">
-        \(\mathcal{L}_I = \mathbb{E}_{q(\mathbf{x}_0, \mathbf{x}_1)}\left[\mathbb{E}_{q_{\mathbf{z}}}\left[\log p_{\theta}(\mathbf{x}_0|\mathbf{x}_1, \mathbf{z})\right]\right] - \mathbb{E}_{q(\mathbf{x}_0)}[\mathrm{KL}(q(\mathbf{x}_T | \mathbf{x}_0) \| p(\mathbf{x}_T))] - \sum_{t=2}^{T} \mathbb{E}_{q(\mathbf{x}_0, \mathbf{x}_t)}\left[\mathbb{E}_{q_{\mathbf{z}}} \left[\mathrm{KL}(q(\mathbf{x}_{t-1}|\mathbf{x}_t, \mathbf{x}_0) \| p_{\theta}(\mathbf{x}_{t-1}|\mathbf{x}_t, \mathbf{z}))\right]\right]\)
-      </div>
-      <div style="text-align: center;">
-        \(- (1-\zeta) \mathbb{E}_{q(\mathbf{x}_0)} [\mathrm{KL}(q_\phi(\mathbf{z}\mid\mathbf{x}_0)\|p(\mathbf{z}))] - (\lambda + \zeta-1) \mathrm{KL}(q_\phi(\mathbf{z}) \| p(\mathbf{z}))\)
+        <div style="text-align: center;">
+          <table class="equation-table">
+              <tr>
+                  <td>\(\mathcal{L}_I\) = </td>
+                  <td>
+                      \(\mathbb{E}_{q(\mathbf{x}_0, \mathbf{x}_1)}\left[\mathbb{E}_{q_{\mathbf{z}}}\left[\log p_{\theta}(\mathbf{x}_0|\mathbf{x}_1, \mathbf{z})\right]\right]\)
+                      - \(\mathbb{E}_{q(\mathbf{x}_0)}[\mathrm{KL}(q(\mathbf{x}_T | \mathbf{x}_0) \| p(\mathbf{x}_T))]\)
+                  </td>
+              </tr>
+              <tr>
+                  <td></td>
+                  <td>
+                      \(- \sum_{t=2}^{T} \mathbb{E}_{q(\mathbf{x}_0, \mathbf{x}_t)}\left[\mathbb{E}_{q_{\mathbf{z}}} \left[\mathrm{KL}(q(\mathbf{x}_{t-1}|\mathbf{x}_t, \mathbf{x}_0) \| p_{\theta}(\mathbf{x}_{t-1}|\mathbf{x}_t, \mathbf{z}))\right]\right]\)
+                  </td>
+              </tr>
+              <tr>
+                  <td></td>
+                  <td>
+                      \(- (1-\zeta) \mathbb{E}_{q(\mathbf{x}_0)} [\mathrm{KL}(q_\phi(\mathbf{z}\mid\mathbf{x}_0)\|p(\mathbf{z}))]\)
+                      - \((\lambda + \zeta-1) \mathrm{KL}(q_\phi(\mathbf{z}) \| p(\mathbf{z}))\)
+                  </td>
+              </tr>
+          </table>
       </div>
       where We now state that \( \text{KL}(q_\phi(\mathbf{z}) || p(\mathbf{z})) \) can be replaced with any strict divergence \( \text{D}(q_\phi(\mathbf{z}) || p(\mathbf{z})) \) without any modification (see our paper for the full derivation).
       
