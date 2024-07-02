@@ -167,7 +167,7 @@
   <!-- Background -->
   <div class="columns is-centered">
     <div class="column is-full-width">
-      <h2 class="title is-3">Background</h2>
+      <h2 class="title is-4">Background</h2>
       <div class="content has-text-justified">
         <p>
           A diffusion model describes how data \(\mathbf{x}_0\) sampled from the data distribution transforms gradually into random Gaussian noise \(\mathbf{x}_T\) through a series of latent variables \(\mathbf{x}_{1:T}\). This process is defined by a latent variable distribution \(p(\mathbf{x}_{0:T})\), which can be factorized as a Markov chain:
@@ -204,7 +204,7 @@
   <!-- Unsupervised Representation Learning -->
   <div class="columns is-centered">
     <div class="column is-full-width">
-      <h2 class="title is-4">Unsupervised Representation Learning</h2>
+      <h2 class="title is-5">Unsupervised Representation Learning</h2>
       <div class="content has-text-justified">
         <p>
           A key goal of generative modeling is representation learning: extracting latent concepts from data without supervision. Generative models \(p(\mathbf{x}, \mathbf{z})\) typically use low-dimensional variables \(\mathbf{z}\) to represent latent concepts, inferred via posterior inference over \(p(\mathbf{z} | \mathbf{x})\).
@@ -218,7 +218,7 @@
   <!-- Diffusion Models With Auxiliary Latents -->
   <div class="columns is-centered">
     <div class="column is-full-width">
-      <h2 class="title is-3">Diffusion Models With Auxiliary Latents</h2>
+      <h2 class="title is-4">Diffusion Models With Auxiliary Latents</h2>
       <div class="content has-text-justified">
         <p>
           We introduce a diffusion model with a semantically meaningful latent space while maintaining high sample quality. Our approach includes three main steps:
@@ -245,7 +245,7 @@
   <!-- Auxiliary Latent Variables and Semantic Prior -->
   <div class="columns is-centered">
     <div class="column is-full-width">
-      <h2 class="title is-4">Auxiliary Latent Variables and Semantic Prior</h2>
+      <h2 class="title is-5">Auxiliary Latent Variables and Semantic Prior</h2>
       <div class="content has-text-justified">
         <p>
           The auxiliary latents \(\mathbf{z}\) aim to encode high-level representations of \(\mathbf{x}_0\). These latents are not restricted in dimension and can be continuous or discrete, representing various factors of variation.
@@ -259,7 +259,7 @@
   <!-- Auxiliary-Variable Diffusion Decoder -->
   <div class="columns is-centered">
     <div class="column is-full-width">
-      <h2 class="title is-4">Auxiliary-Variable Diffusion Decoder</h2>
+      <h2 class="title is-5">Auxiliary-Variable Diffusion Decoder</h2>
       <div class="content has-text-justified">
         <p>
           The decoder \(p_{\theta}(\mathbf{x}_{t-1} | \mathbf{x}_t, \mathbf{z})\) is conditioned on the auxiliary latents \(\mathbf{z}\). In a trained model, \(\mathbf{z}\) captures high-level concepts (e.g., age or skin color), while the sequence of \(\mathbf{x}_t\) progressively adds lower-level details (e.g., hair texture).
@@ -344,7 +344,7 @@
     <!-- Citation -->
     <div class="columns is-centered">
       <div class="column is-full-width">
-        <h2 class="title is-3">BibTeX</h2>
+        <h2 class="title is-4">BibTeX</h2>
         <div class="content has-text-justified">
           <pre class="scrollable"><code>@inproceedings{wang2023infodiffusion,
       title={Infodiffusion: Representation learning using information maximizing diffusion models},
