@@ -160,101 +160,131 @@
   </div>
 </section>
 
-<section id="background">
-        <h1>Background</h1>
-        <p>
+<!-- Background -->
+    <div class="columns is-centered">
+      <div class="column is-full-width">
+        <h2 class="title is-3">Background</h2>
+        <div class="content has-text-justified">
+          <p>
             A diffusion model describes how data <em>(x<sub>0</sub>)</em> sampled from the data distribution transforms gradually into random Gaussian noise <em>(x<sub>T</sub>)</em> through a series of latent variables <em>(x<sub>1:T</sub>)</em>. This process is defined by a latent variable distribution <em>(p(x<sub>0:T</sub>))</em>, which can be factorized as a Markov chain:
-        </p>
-        <pre>
+          </p>
+          <pre>
 p(x<sub>0:T</sub>) = p(x<sub>T</sub>) ∏<sub>t=0</sub><sup>T-1</sup> p<sub>θ</sub>(x<sub>t</sub> | x<sub>t+1</sub>).
-        </pre>
-        <p>
+          </pre>
+          <p>
             This Markov chain maps noise <em>(x<sub>T</sub>)</em> back into data <em>(x<sub>0</sub>)</em> by reversing a noising process <em>(q)</em>. Here, we use a learned denoising distribution <em>(p<sub>θ</sub>)</em> parameterized by a neural network with parameters <em>θ</em>.
-        </p>
-        <p>
+          </p>
+          <p>
             The noising process <em>(q)</em> starts with clean data <em>(x<sub>0</sub>)</em> from the data distribution <em>(q(x<sub>0</sub>))</em> and gradually corrupts it through a sequence of variables <em>(x<sub>1:T</sub>)</em> in a Markov chain:
-        </p>
-        <pre>
+          </p>
+          <pre>
 q(x<sub>1:T</sub> | x<sub>0</sub>) = ∏<sub>t=1</sub><sup>T</sup> q(x<sub>t</sub> | x<sub>t-1</sub>).
-        </pre>
-        <p>
+          </pre>
+          <p>
             Each step <em>(q(x<sub>t</sub> | x<sub>t-1</sub>))</em> is modeled as a Gaussian distribution with a schedule <em>(α<sub>t</sub>)</em>. The marginal distribution of <em>(q)</em> is:
-        </p>
-        <pre>
+          </p>
+          <pre>
 q(x<sub>t</sub> | x<sub>0</sub>) = 𝒩(x<sub>t</sub>; √<bar>α<sub>t</sub>x<sub>0</sub>, √(1-<bar>α<sub>t</sub>)𝑰),
-        </pre>
-        <p>
+          </pre>
+          <p>
             where <em><bar>α<sub>t</sub></em> is the cumulative product of the schedule parameters <em>(α<sub>t</sub>)</em>.
-        </p>
-        <p>
+          </p>
+          <p>
             To train <em>(p)</em>, we maximize the evidence lower bound (ELBO) using variational inference:
-        </p>
-        <pre>
+          </p>
+          <pre>
 log p(x<sub>0</sub>) ≥ 𝔼<sub>q(x<sub>1</sub> | x<sub>0</sub>)</sub>[log p<sub>θ</sub>(x<sub>0</sub> | x<sub>1</sub>)]
 - KL(q(x<sub>T</sub> | x<sub>0</sub>) || p(x<sub>T</sub>))
 - ∑<sub>t=2</sub><sup>T</sup> 𝔼<sub>q(x<sub>t</sub> | x<sub>0</sub>)</sub>[KL(q(x<sub>t-1</sub> | x<sub>t</sub>, x<sub>0</sub>) || p<sub>θ</sub>(x<sub>t-1</sub> | x<sub>t</sub>))],
-        </pre>
-        <p>
+          </pre>
+          <p>
             where <em>KL</em> denotes the Kullback–Leibler divergence.
-        </p>
-    </section>
+          </p>
+        </div>
+      </div>
+    </div>
+    <!--/ Background -->
     
-    <section id="unsupervised-representation-learning">
-        <h2>Unsupervised Representation Learning</h2>
-        <p>
+    <!-- Unsupervised Representation Learning -->
+    <div class="columns is-centered">
+      <div class="column is-full-width">
+        <h2 class="title is-3">Unsupervised Representation Learning</h2>
+        <div class="content has-text-justified">
+          <p>
             A key goal of generative modeling is representation learning: extracting latent concepts from data without supervision. Generative models <em>(p(x, z))</em> typically use low-dimensional variables <em>(z)</em> to represent latent concepts, inferred via posterior inference over <em>(p(z | x))</em>.
-        </p>
-        <p>
+          </p>
+          <p>
             Variational Autoencoders (VAEs) follow this framework but do not produce state-of-the-art samples. Diffusion models, on the other hand, generate high-quality samples but lack an interpretable low-dimensional latent space, making them less suitable for representation learning.
-        </p>
-    </section>
+          </p>
+        </div>
+      </div>
+    </div>
+    <!--/ Unsupervised Representation Learning -->
     
-    <section id="diffusion-models-with-auxiliary-latents">
-        <h1>Diffusion Models With Auxiliary Latents</h1>
-        <p>
+    <!-- Diffusion Models With Auxiliary Latents -->
+    <div class="columns is-centered">
+      <div class="column is-full-width">
+        <h2 class="title is-3">Diffusion Models With Auxiliary Latents</h2>
+        <div class="content has-text-justified">
+          <p>
             This paper introduces a diffusion model with a semantically meaningful latent space while maintaining high sample quality. Our approach includes three main steps:
-        </p>
-        <ol>
+          </p>
+          <ol>
             <li>Define a diffusion model family with low-dimensional latent variables.</li>
             <li>Specify learning objectives for this model family.</li>
             <li>Introduce a regularizer based on mutual information to enhance the quality of latents.</li>
-        </ol>
-        <p>
+          </ol>
+          <p>
             We define an auxiliary-variable diffusion model as:
-        </p>
-        <pre>
+          </p>
+          <pre>
 p(x<sub>0:T</sub>, z) = p(x<sub>T</sub>) p(z) ∏<sub>t=1</sub><sup>T</sup> p<sub>θ</sub>(x<sub>t-1</sub> | x<sub>t</sub>, z).
-        </pre>
-        <p>
+          </pre>
+          <p>
             This model performs a reverse diffusion process <em>(p<sub>θ</sub>(x<sub>t-1</sub> | x<sub>t</sub>, z))</em> over <em>(x<sub>0:T</sub>)</em> conditioned on auxiliary latents <em>(z)</em>, which are distributed according to a prior <em>(p(z))</em>.
-        </p>
-    </section>
+          </p>
+        </div>
+      </div>
+    </div>
+    <!--/ Diffusion Models With Auxiliary Latents -->
     
-    <section id="auxiliary-latent-variables-and-semantic-prior">
-        <h2>Auxiliary Latent Variables and Semantic Prior</h2>
-        <p>
+    <!-- Auxiliary Latent Variables and Semantic Prior -->
+    <div class="columns is-centered">
+      <div class="column is-full-width">
+        <h2 class="title is-3">Auxiliary Latent Variables and Semantic Prior</h2>
+        <div class="content has-text-justified">
+          <p>
             The auxiliary latents <em>(z)</em> aim to encode high-level representations of <em>(x<sub>0</sub>)</em>. These latents are not restricted in dimension and can be continuous or discrete, representing various factors of variation.
-        </p>
-        <p>
+          </p>
+          <p>
             The prior <em>(p(z))</em> ensures a principled probabilistic model, allowing unconditional sampling of <em>(x<sub>0</sub>)</em> and encoding domain knowledge about <em>(z)</em>. For example, if the dataset has <em>K</em> distinct classes, we can set <em>p(z)</em> to be a mixture of <em>K</em> components.
-        </p>
-    </section>
+          </p>
+        </div>
+      </div>
+    </div>
+    <!--/ Auxiliary Latent Variables and Semantic Prior -->
     
-    <section id="auxiliary-variable-diffusion-decoder">
-        <h2>Auxiliary-Variable Diffusion Decoder</h2>
-        <p>
+    <!-- Auxiliary-Variable Diffusion Decoder -->
+    <div class="columns is-centered">
+      <div class="column is-full-width">
+        <h2 class="title is-3">Auxiliary-Variable Diffusion Decoder</h2>
+        <div class="content has-text-justified">
+          <p>
             The decoder <em>(p<sub>θ</sub>(x<sub>t-1</sub> | x<sub>t</sub>, z))</em> is conditioned on the auxiliary latents <em>(z)</em>. In a trained model, <em>(z)</em> captures high-level concepts (e.g., age or skin color), while the sequence of <em>(x<sub>t</sub>)</em> progressively adds lower-level details (e.g., hair texture).
-        </p>
-        <p>
+          </p>
+          <p>
             Following previous work, we define the decoder as:
-        </p>
-        <pre>
+          </p>
+          <pre>
 p<sub>θ</sub>(x<sub>t-1</sub> | x<sub>t</sub>, z) = 1/√<α<sub>t</sub>(x<sub>t</sub> - (1-α<sub>t</sub>) / √(1-<bar>α<sub>t</sub>)ε<sub>θ</sub>(x<sub>t-1</sub>, t, z)),
-        </pre>
-        <p>
+          </pre>
+          <p>
             with a noise prediction network <em>(ε<sub>θ</sub>(x<sub>t-1</sub>, t, z))</em> parameterized by a U-Net.
-        </p>
-    </section>
+          </p>
+        </div>
+      </div>
+    </div>
+    <!--/ Auxiliary-Variable Diffusion Decoder -->
 
     <!-- Citation. -->
     <div class="columns is-centered">
