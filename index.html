@@ -132,7 +132,7 @@
         </tr>
       </table>
       <h2 class="subtitle has-text-centered">
-        InfoDiffusion: A principled probabilistic extension of diffusion models that supports low-dimensional latents with associated variational learning objectives.
+        (<em>Left</em>) Flow chart demonstrating auxiliary-variable diffusion model with mutual information and prior regularization. (<em>Right</em>) InfoDiffusion produces semantically meaningful latent space for a diffusion model. (<em>Top Right</em>) Smooth latent space. (<em>Bottom Right</em>) Disentangled, human-interpretable factors of variation.
       </h2>
     </div>
   </div>
@@ -147,7 +147,11 @@
         <h2 class="title is-3">Abstract</h2>
         <div class="content has-text-justified">
           <p>
-            We introduce InfoDiffusion, a principled probabilistic extension of diffusion models that supports low-dimensional latents with associated variational learning objectives that are regularized with a mutual information term. We show that these algorithms simultaneously yield high-quality samples and latent representations, achieving competitive performance with state-of-the-art methods on both fronts.
+            While diffusion models excel at generating high-quality samples, their latent variables typically lack semantic meaning and are not suitable for representation learning.
+            Here, we propose InfoDiffusion, an algorithm that augments diffusion models with low-dimensional latent variables that capture high-level factors of variation in the data. % (e.g., high-level image attributes like hair color, eye color, etc.)
+            InfoDiffusion relies on a learning objective regularized with the mutual information between observed and hidden variables, which improves latent space quality and prevents the latents from being ignored by expressive diffusion-based decoders.
+            Empirically, we find that InfoDiffusion learns disentangled and human-interpretable latent representations that are competitive with state-of-the-art generative and contrastive methods, while retaining the high sample quality of diffusion models. 
+            Our method enables manipulating the attributes of generated images and has the potential to assist tasks that require exploring a learned latent space to generate quality samples, e.g., generative design.
           </p>
         </div>
       </div>
