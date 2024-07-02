@@ -210,7 +210,7 @@ log p(x<sub>0</sub>) ≥ 𝔼<sub>q(x<sub>1</sub> | x<sub>0</sub>)</sub>[log p<s
     <!-- Unsupervised Representation Learning -->
     <div class="columns is-centered">
       <div class="column is-full-width">
-        <h2 class="title is-3">Unsupervised Representation Learning</h2>
+        <h2 class="title is-4">Unsupervised Representation Learning</h2>
         <div class="content has-text-justified">
           <p>
             A key goal of generative modeling is representation learning: extracting latent concepts from data without supervision. Generative models <em>(p(x, z))</em> typically use low-dimensional variables <em>(z)</em> to represent latent concepts, inferred via posterior inference over <em>(p(z | x))</em>.
@@ -253,7 +253,7 @@ p(x<sub>0:T</sub>, z) = p(x<sub>T</sub>) p(z) ∏<sub>t=1</sub><sup>T</sup> p<su
     <!-- Auxiliary Latent Variables and Semantic Prior -->
     <div class="columns is-centered">
       <div class="column is-full-width">
-        <h2 class="title is-3">Auxiliary Latent Variables and Semantic Prior</h2>
+        <h2 class="title is-4">Auxiliary Latent Variables and Semantic Prior</h2>
         <div class="content has-text-justified">
           <p>
             The auxiliary latents <em>(z)</em> aim to encode high-level representations of <em>(x<sub>0</sub>)</em>. These latents are not restricted in dimension and can be continuous or discrete, representing various factors of variation.
@@ -269,7 +269,7 @@ p(x<sub>0:T</sub>, z) = p(x<sub>T</sub>) p(z) ∏<sub>t=1</sub><sup>T</sup> p<su
     <!-- Auxiliary-Variable Diffusion Decoder -->
     <div class="columns is-centered">
       <div class="column is-full-width">
-        <h2 class="title is-3">Auxiliary-Variable Diffusion Decoder</h2>
+        <h2 class="title is-4">Auxiliary-Variable Diffusion Decoder</h2>
         <div class="content has-text-justified">
           <p>
             The decoder <em>(p<sub>θ</sub>(x<sub>t-1</sub> | x<sub>t</sub>, z))</em> is conditioned on the auxiliary latents <em>(z)</em>. In a trained model, <em>(z)</em> captures high-level concepts (e.g., age or skin color), while the sequence of <em>(x<sub>t</sub>)</em> progressively adds lower-level details (e.g., hair texture).
@@ -316,16 +316,13 @@ p<sub>θ</sub>(x<sub>t-1</sub> | x<sub>t</sub>, z) = 1/√<α<sub>t</sub>(x<sub>
       <div class="column is-8">
         <div class="content">
           <p>
+            This webpage was built using the <a href="https://github.com/eliahuhorwitz/Academic-project-page-template">Academic Project Page Template</a> which was adopted from the <a href="https://github.com/nerfies/nerfies.github.io">Nerfies</a> project page. You are free to borrow the of this website, we just ask that you link back to this page in the footer.
             This website is licensed under a <a rel="license"
                                                 href="http://creativecommons.org/licenses/by-sa/4.0/">Creative
             Commons Attribution-ShareAlike 4.0 International License</a>.
           </p>
           <p>
-            This means you are free to borrow the <a
-              href="https://github.com/nerfies/nerfies.github.io">source code</a> of this website,
-            we just ask that you link back to this page in the footer.
-            Please remember to remove the analytics code included in the header of the website which
-            you do not want on your website.
+            Please remember to remove the analytics code included in the header of the website which you do not want on your website.
           </p>
         </div>
       </div>
