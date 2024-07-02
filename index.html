@@ -320,17 +320,16 @@
         where \(\mathcal{L}_D(\mathbf{x}_0)\) is from the denoising objective, and \(\zeta, \beta > 0\) are scalars controlling the regularization strength. We can rewrite this objective into a tractable form:
       </p>
       <div style="text-align: center;">
-        \(\mathcal{L}_I = \mathbb{E}_{q(\mathbf{x}_0, \mathbf{x}_1)}\left[\mathbb{E}_{q_{\mathbf{z}}}\left[\log p_{\theta}(\mathbf{x}_0|\mathbf{x}_1, \mathbf{z})\right]\right] - \mathbb{E}_{q(\mathbf{x}_0)}[\mathrm{KL}(q(\mathbf{x}_T | \mathbf{x}_0) \| p(\mathbf{x}_T))]\)
-        \(- \sum_{t=2}^{T} \mathbb{E}_{q(\mathbf{x}_0, \mathbf{x}_t)}\left[\mathbb{E}_{q_{\mathbf{z}}} \left[\mathrm{KL}(q(\mathbf{x}_{t-1}|\mathbf{x}_t, \mathbf{x}_0) \| p_{\theta}(\mathbf{x}_{t-1}|\mathbf{x}_t, \mathbf{z}))\right]\right]\)
+        \(\mathcal{L}_I = \mathbb{E}_{q(\mathbf{x}_0, \mathbf{x}_1)}\left[\mathbb{E}_{q_{\mathbf{z}}}\left[\log p_{\theta}(\mathbf{x}_0|\mathbf{x}_1, \mathbf{z})\right]\right] - \mathbb{E}_{q(\mathbf{x}_0)}[\mathrm{KL}(q(\mathbf{x}_T | \mathbf{x}_0) \| p(\mathbf{x}_T))] - \sum_{t=2}^{T} \mathbb{E}_{q(\mathbf{x}_0, \mathbf{x}_t)}\left[\mathbb{E}_{q_{\mathbf{z}}} \left[\mathrm{KL}(q(\mathbf{x}_{t-1}|\mathbf{x}_t, \mathbf{x}_0) \| p_{\theta}(\mathbf{x}_{t-1}|\mathbf{x}_t, \mathbf{z}))\right]\right]\)
       </div>
       <div style="text-align: center;">
         \(- (1-\zeta) \mathbb{E}_{q(\mathbf{x}_0)} [\mathrm{KL}(q_\phi(\mathbf{z}\mid\mathbf{x}_0)\|p(\mathbf{z}))] - (\lambda + \zeta-1) \mathrm{KL}(q_\phi(\mathbf{z}) \| p(\mathbf{z}))\)
       </div>
-      where We now state that \( \KL(q_\phi(\mathbf{z}) || p(\mathbf{z})) \) can be replaced with any strict divergence \( \text{D}(q_\phi(\mathbf{z}) || p(\mathbf{z})) \) without any modification (see our paper for the full derivation).
+      where We now state that \( \text{KL}(q_\phi(\mathbf{z}) || p(\mathbf{z})) \) can be replaced with any strict divergence \( \text{D}(q_\phi(\mathbf{z}) || p(\mathbf{z})) \) without any modification (see our paper for the full derivation).
       
       <h3 class="title is-5">Comparing InfoDiffusion to Existing Models</h3>
       <p>
-        The InfoDiffusion algorithm generalizes several existing methods. When the decoder performs one step of diffusion (\(T=1\)), it is equivalent to <a href="https://arxiv.org/abs/1706.02262">InfoVAE<\a> Choosing \(\lambda=0\) recovers the <a href="https://openreview.net/forum?id=Sy2fzU9gl">\(\beta\)-VAE<\a> model. When \(T=1\) and \(\text{D}\) is the Jensen-Shannon divergence, it recovers <a href="https://arxiv.org/abs/1511.05644">adversarial auto-encoders (AAEs)<\a>. InfoDiffusion extends these models to diffusion decoders, similar to how DDPM extends VAEs. When \(\zeta=\lambda=0\), it recovers <a href="https://arxiv.org/abs/2111.15640">DiffAE<\a>.
+        The InfoDiffusion algorithm generalizes several existing methods. When the decoder performs one step of diffusion (\(T=1\)), it is equivalent to <a href="https://arxiv.org/abs/1706.02262">InfoVAE</a> Choosing \(\lambda=0\) recovers the <a href="https://openreview.net/forum?id=Sy2fzU9gl">\(\beta\)-VAE</a> model. When \(T=1\) and \(\text{D}\) is the Jensen-Shannon divergence, it recovers <a href="https://arxiv.org/abs/1511.05644">adversarial auto-encoders (AAEs)</a>. InfoDiffusion extends these models to diffusion decoders, similar to how DDPM extends VAEs. When \(\zeta=\lambda=0\), it recovers <a href="https://arxiv.org/abs/2111.15640">DiffAE</a>.
       </p>
     </div>
   </div>
