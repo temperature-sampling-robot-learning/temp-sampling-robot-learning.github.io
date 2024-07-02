@@ -160,76 +160,101 @@
   </div>
 </section>
 
-<section class="section">
-  <div class="container is-max-desktop">
-
-    <div class="columns is-centered">
-
-      <!-- Code Organization. -->
-      <div class="column">
-        <div class="content">
-          <h2 class="title is-3">Code Organization</h2>
-          <p>
-            The repository is organized as follows:
-          </p>
-          <ul>
-            <li><code>run.py</code>: Routines for training and evaluation</li>
-            <li><code>models.py</code>: Diffusion models (InfoDiffusion, DiffAE, regular diffusion), VAEs (InfoVAE, β-VAE, VAE)</li>
-            <li><code>modules.py</code>: Neural network blocks</li>
-            <li><code>sampling.py</code>: DDPM/DDIM sampler, Reverse DDIM sampler, Two-phase sampler, Latent sampler</li>
-            <li><code>utils.py</code>: LR scheduler, logging, utils to calculate priors</li>
-            <li><code>gen_fid_stats.py</code>: Generate stats used for FID calculation</li>
-            <li><code>calc_fid.py</code>: Calculation FID scores</li>
-          </ul>
-        </div>
-      </div>
-      <!--/ Code Organization. -->
-
-    </div>
-
-    <!-- Evaluation. -->
-    <div class="columns is-centered">
-      <div class="column is-full-width">
-        <h2 class="title is-3">Evaluation</h2>
-
-        <!-- Evaluation Steps. -->
-        <div class="content has-text-justified">
-          <p>
-            Below are the steps required for evaluating the trained diffusion models. Different evaluation runs can be switched using <code>--mode</code>, which takes one of the following values:
-          </p>
-          <ul>
-            <li><code>eval</code>: sampling images from the trained diffusion model.</li>
-            <li><code>eval_fid</code>: sampling images for FID score calculation.</li>
-            <li><code>save_latent</code>: save the auxiliary variables.</li>
-            <li><code>disentangle</code>: run evaluation on auxiliary variable disentanglement.</li>
-            <li><code>interpolate</code>: run interpolation between two given input images.</li>
-            <li><code>latent_quality</code>: save the auxiliary variables and latent variables for classification.</li>
-            <li><code>train_latent_ddim</code>: train the latent diffusion models used in latent sampler.</li>
-            <li><code>plot_latent</code>: plot the latent space.</li>
-          </ul>
-        </div>
-        <!--/ Evaluation Steps. -->
-
-      </div>
-    </div>
-    <!--/ Evaluation. -->
-
-    <!-- Baselines. -->
-    <div class="columns is-centered">
-      <div class="column is-full-width">
-        <h2 class="title is-3">Baselines</h2>
-        <div class="content has-text-justified">
-          <p>
-            The baselines can be easily switched by using the argument <code>--model</code>, which takes in one of the following values <code>['diff', 'vae', 'vanilla']</code> where <code>'diff'</code> is for AVDM, <code>'vae'</code> is for the VAE model family, and <code>'vanilla'</code> is for the regular diffusion models.
-          </p>
-          <p>
-            Below is an example to train InfoVAE:
-          </p>
-          <pre><code>python run.py --model vae --mode train --mmd_weight 0.1 --a_dim 32 --epochs 50 --dataset celeba --batch_size 32 --save_epochs 5 --prior regular --r_seed 64</code></pre>
-        </div>
-      </div>
-    </div>
-    <!--/ Baselines. -->
+<section id="background">
+        <h1>Background</h1>
+        <p>
+            A diffusion model describes how data <em>(x<sub>0</sub>)</em> sampled from the data distribution transforms gradually into random Gaussian noise <em>(x<sub>T</sub>)</em> through a series of latent variables <em>(x<sub>1:T</sub>)</em>. This process is defined by a latent variable distribution <em>(p(x<sub>0:T</sub>))</em>, which can be factorized as a Markov chain:
+        </p>
+        <pre>
+p(x<sub>0:T</sub>) = p(x<sub>T</sub>) ∏<sub>t=0</sub><sup>T-1</sup> p<sub>θ</sub>(x<sub>t</sub> | x<sub>t+1</sub>).
+        </pre>
+        <p>
+            This Markov chain maps noise <em>(x<sub>T</sub>)</em> back into data <em>(x<sub>0</sub>)</em> by reversing a noising process <em>(q)</em>. Here, we use a learned denoising distribution <em>(p<sub>θ</sub>)</em> parameterized by a neural network with parameters <em>θ</em>.
+        </p>
+        <p>
+            The noising process <em>(q)</em> starts with clean data <em>(x<sub>0</sub>)</em> from the data distribution <em>(q(x<sub>0</sub>))</em> and gradually corrupts it through a sequence of variables <em>(x<sub>1:T</sub>)</em> in a Markov chain:
+        </p>
+        <pre>
+q(x<sub>1:T</sub> | x<sub>0</sub>) = ∏<sub>t=1</sub><sup>T</sup> q(x<sub>t</sub> | x<sub>t-1</sub>).
+        </pre>
+        <p>
+            Each step <em>(q(x<sub>t</sub> | x<sub>t-1</sub>))</em> is modeled as a Gaussian distribution with a schedule <em>(α<sub>t</sub>)</em>. The marginal distribution of <em>(q)</em> is:
+        </p>
+        <pre>
+q(x<sub>t</sub> | x<sub>0</sub>) = 𝒩(x<sub>t</sub>; √<bar>α<sub>t</sub>x<sub>0</sub>, √(1-<bar>α<sub>t</sub>)𝑰),
+        </pre>
+        <p>
+            where <em><bar>α<sub>t</sub></em> is the cumulative product of the schedule parameters <em>(α<sub>t</sub>)</em>.
+        </p>
+        <p>
+            To train <em>(p)</em>, we maximize the evidence lower bound (ELBO) using variational inference:
+        </p>
+        <pre>
+log p(x<sub>0</sub>) ≥ 𝔼<sub>q(x<sub>1</sub> | x<sub>0</sub>)</sub>[log p<sub>θ</sub>(x<sub>0</sub> | x<sub>1</sub>)]
+- KL(q(x<sub>T</sub> | x<sub>0</sub>) || p(x<sub>T</sub>))
+- ∑<sub>t=2</sub><sup>T</sup> 𝔼<sub>q(x<sub>t</sub> | x<sub>0</sub>)</sub>[KL(q(x<sub>t-1</sub> | x<sub>t</sub>, x<sub>0</sub>) || p<sub>θ</sub>(x<sub>t-1</sub> | x<sub>t</sub>))],
+        </pre>
+        <p>
+            where <em>KL</em> denotes the Kullback–Leibler divergence.
+        </p>
+    </section>
+    
+    <section id="unsupervised-representation-learning">
+        <h2>Unsupervised Representation Learning</h2>
+        <p>
+            A key goal of generative modeling is representation learning: extracting latent concepts from data without supervision. Generative models <em>(p(x, z))</em> typically use low-dimensional variables <em>(z)</em> to represent latent concepts, inferred via posterior inference over <em>(p(z | x))</em>.
+        </p>
+        <p>
+            Variational Autoencoders (VAEs) follow this framework but do not produce state-of-the-art samples. Diffusion models, on the other hand, generate high-quality samples but lack an interpretable low-dimensional latent space, making them less suitable for representation learning.
+        </p>
+    </section>
+    
+    <section id="diffusion-models-with-auxiliary-latents">
+        <h1>Diffusion Models With Auxiliary Latents</h1>
+        <p>
+            This paper introduces a diffusion model with a semantically meaningful latent space while maintaining high sample quality. Our approach includes three main steps:
+        </p>
+        <ol>
+            <li>Define a diffusion model family with low-dimensional latent variables.</li>
+            <li>Specify learning objectives for this model family.</li>
+            <li>Introduce a regularizer based on mutual information to enhance the quality of latents.</li>
+        </ol>
+        <p>
+            We define an auxiliary-variable diffusion model as:
+        </p>
+        <pre>
+p(x<sub>0:T</sub>, z) = p(x<sub>T</sub>) p(z) ∏<sub>t=1</sub><sup>T</sup> p<sub>θ</sub>(x<sub>t-1</sub> | x<sub>t</sub>, z).
+        </pre>
+        <p>
+            This model performs a reverse diffusion process <em>(p<sub>θ</sub>(x<sub>t-1</sub> | x<sub>t</sub>, z))</em> over <em>(x<sub>0:T</sub>)</em> conditioned on auxiliary latents <em>(z)</em>, which are distributed according to a prior <em>(p(z))</em>.
+        </p>
+    </section>
+    
+    <section id="auxiliary-latent-variables-and-semantic-prior">
+        <h2>Auxiliary Latent Variables and Semantic Prior</h2>
+        <p>
+            The auxiliary latents <em>(z)</em> aim to encode high-level representations of <em>(x<sub>0</sub>)</em>. These latents are not restricted in dimension and can be continuous or discrete, representing various factors of variation.
+        </p>
+        <p>
+            The prior <em>(p(z))</em> ensures a principled probabilistic model, allowing unconditional sampling of <em>(x<sub>0</sub>)</em> and encoding domain knowledge about <em>(z)</em>. For example, if the dataset has <em>K</em> distinct classes, we can set <em>p(z)</em> to be a mixture of <em>K</em> components.
+        </p>
+    </section>
+    
+    <section id="auxiliary-variable-diffusion-decoder">
+        <h2>Auxiliary-Variable Diffusion Decoder</h2>
+        <p>
+            The decoder <em>(p<sub>θ</sub>(x<sub>t-1</sub> | x<sub>t</sub>, z))</em> is conditioned on the auxiliary latents <em>(z)</em>. In a trained model, <em>(z)</em> captures high-level concepts (e.g., age or skin color), while the sequence of <em>(x<sub>t</sub>)</em> progressively adds lower-level details (e.g., hair texture).
+        </p>
+        <p>
+            Following previous work, we define the decoder as:
+        </p>
+        <pre>
+p<sub>θ</sub>(x<sub>t-1</sub> | x<sub>t</sub>, z) = 1/√<α<sub>t</sub>(x<sub>t</sub> - (1-α<sub>t</sub>) / √(1-<bar>α<sub>t</sub>)ε<sub>θ</sub>(x<sub>t-1</sub>, t, z)),
+        </pre>
+        <p>
+            with a noise prediction network <em>(ε<sub>θ</sub>(x<sub>t-1</sub>, t, z))</em> parameterized by a U-Net.
+        </p>
+    </section>
 
     <!-- Citation. -->
     <div class="columns is-centered">
@@ -254,15 +279,6 @@
 
 <footer class="footer">
   <div class="container">
-    <div class="content has-text-centered">
-      <a class="icon-link"
-         href="./static/videos/nerfies_paper.pdf">
-        <i class="fas fa-file-pdf"></i>
-      </a>
-      <a class="icon-link" href="https://github.com/keunhong" class="external-link" disabled>
-        <i class="fab fa-github"></i>
-      </a>
-    </div>
     <div class="columns is-centered">
       <div class="column is-8">
         <div class="content">
