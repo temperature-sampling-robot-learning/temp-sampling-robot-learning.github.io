@@ -176,9 +176,6 @@
           \( p(\mathbf{x}_{0:T}) = p(\mathbf{x}_T) \prod_{t=0}^{T-1} p_{\theta}(\mathbf{x}_t | \mathbf{x}_{t+1}) \)
         </div>
         <p>
-          This Markov chain maps noise \(\mathbf{x}_T\) back into data \(\mathbf{x}_0\) by reversing a noising process \(q\). Here, we use a learned denoising distribution \(p_{\theta}\) parameterized by a neural network with parameters \(\theta\).
-        </p>
-        <p>
           The noising process \(q\) starts with clean data \(\mathbf{x}_0\) from the data distribution \(q(\mathbf{x}_0)\) and gradually corrupts it through a sequence of variables \(\mathbf{x}_{1:T}\) in a Markov chain:
         </p>
         <div style="text-align: center;">
@@ -197,11 +194,8 @@
           To train \(p\), we maximize the evidence lower bound (ELBO) using variational inference:
         </p>
         <div style="text-align: center;">
-          \( \log p(\mathbf{x}_0) \geq \mathbb{E}_{q(\mathbf{x}_1 | \mathbf{x}_0)} [ \log p_{\theta}(\mathbf{x}_0 | \mathbf{x}_1) ] - \text{KL}(q(\mathbf{x}_T | \mathbf{x}_0) \| p(\mathbf{x}_T)) - \sum_{t=2}^{T} \mathbb{E}_{q(\mathbf{x}_t | \mathbf{x}_0)} [ \text{KL}(q(\mathbf{x}_{t-1} | \mathbf{x}_t, \mathbf{x}_0) \| p_{\theta}(\mathbf{x}_{t-1} | \mathbf{x}_t)) ] \)
+          \( \log p(\mathbf{x}_0) \geq \mathbb{E}_{q(\mathbf{x}_1 | \mathbf{x}_0)} [ \log p_{\theta}(\mathbf{x}_0 | \mathbf{x}_1) ] - \text{KL}(q(\mathbf{x}_T | \mathbf{x}_0) \| p(\mathbf{x}_T)) - \sum_{t=2}^{T} \mathbb{E}_{q(\mathbf{x}_t | \mathbf{x}_0)} [ \text{KL}(q(\mathbf{x}_{t-1} | \mathbf{x}_t, \mathbf{x}_0) \| p_{\theta}(\mathbf{x}_{t-1} | \mathbf{x}_t)) ]. \)
         </div>
-        <p>
-          where \(\text{KL}\) denotes the Kullback–Leibler divergence.
-        </p>
       </div>
     </div>
   </div>
@@ -213,9 +207,7 @@
       <h2 class="title is-4">Unsupervised Representation Learning</h2>
       <div class="content has-text-justified">
         <p>
-          A key goal of generative modeling is representation learning: extracting latent concepts from data without supervision. Generative models \(p(x, z)\) typically use low-dimensional variables \(z\) to represent latent concepts, inferred via posterior inference over \(p(z | x)\).
-        </p>
-        <p>
+          A key goal of generative modeling is representation learning: extracting latent concepts from data without supervision. Generative models \(p(\mathbf{x}, \mathbf{z})\) typically use low-dimensional variables \(\mathbf{z}\) to represent latent concepts, inferred via posterior inference over \(p(\mathbf{z} | \mathbf{x})\).
           Variational Autoencoders (VAEs) follow this framework but do not produce state-of-the-art samples. Diffusion models, on the other hand, generate high-quality samples but lack an interpretable low-dimensional latent space, making them less suitable for representation learning.
         </p>
       </div>
@@ -229,7 +221,7 @@
       <h2 class="title is-3">Diffusion Models With Auxiliary Latents</h2>
       <div class="content has-text-justified">
         <p>
-          This paper introduces a diffusion model with a semantically meaningful latent space while maintaining high sample quality. Our approach includes three main steps:
+          We introduce a diffusion model with a semantically meaningful latent space while maintaining high sample quality. Our approach includes three main steps:
         </p>
         <ol>
           <li>Define a diffusion model family with low-dimensional latent variables.</li>
@@ -239,11 +231,11 @@
         <p>
           We define an auxiliary-variable diffusion model as:
         </p>
-        <pre>
-          \( p(x_{0:T}, z) = p(x_T) p(z) \prod_{t=1}^{T} p_{\theta}(x_{t-1} | x_t, z) \)
-        </pre>
+        <div style="text-align: center;">
+          \( p(\mathbf{x}_{0:T}, \mathbf{z}) = p(\mathbf{x}_T) p(\mathbf{z}) \prod_{t=1}^{T} p_{\theta}(\mathbf{x}_{t-1} | \mathbf{x}_t, \mathbf{z}) \)
+        </div>
         <p>
-          This model performs a reverse diffusion process \(p_{\theta}(x_{t-1} | x_t, z)\) over \(x_{0:T}\) conditioned on auxiliary latents \(z\), which are distributed according to a prior \(p(z)\).
+          This model performs a reverse diffusion process \(p_{\theta}(\mathbf{x}_{t-1} | \mathbf{x}_t, \mathbf{z})\) over \(\mathbf{x}_{0:T}\) conditioned on auxiliary latents \(\mathbf{z}\), which are distributed according to a prior \(p(\mathbf{z})\).
         </p>
       </div>
     </div>
@@ -256,10 +248,8 @@
       <h2 class="title is-4">Auxiliary Latent Variables and Semantic Prior</h2>
       <div class="content has-text-justified">
         <p>
-          The auxiliary latents \(z\) aim to encode high-level representations of \(x_0\). These latents are not restricted in dimension and can be continuous or discrete, representing various factors of variation.
-        </p>
-        <p>
-          The prior \(p(z)\) ensures a principled probabilistic model, allowing unconditional sampling of \(x_0\) and encoding domain knowledge about \(z\). For example, if the dataset has \(K\) distinct classes, we can set \(p(z)\) to be a mixture of \(K\) components.
+          The auxiliary latents \(\mathbf{z}\) aim to encode high-level representations of \(\mathbf{x}_0\). These latents are not restricted in dimension and can be continuous or discrete, representing various factors of variation.
+          The prior \(p(\mathbf{z})\) ensures a principled probabilistic model, allowing unconditional sampling of \(\mathbf{x}_0\) and encoding domain knowledge about \(\mathbf{z}\). For example, if the dataset has \(K\) distinct classes, we can set \(p(\mathbf{z})\) to be a mixture of \(K\) components.
         </p>
       </div>
     </div>
@@ -272,17 +262,12 @@
       <h2 class="title is-4">Auxiliary-Variable Diffusion Decoder</h2>
       <div class="content has-text-justified">
         <p>
-          The decoder \(p_{\theta}(x_{t-1} | x_t, z)\) is conditioned on the auxiliary latents \(z\). In a trained model, \(z\) captures high-level concepts (e.g., age or skin color), while the sequence of \(x_t\) progressively adds lower-level details (e.g., hair texture).
-        </p>
-        <p>
+          The decoder \(p_{\theta}(\mathbf{x}_{t-1} | \mathbf{x}_t, \mathbf{z})\) is conditioned on the auxiliary latents \(\mathbf{z}\). In a trained model, \(\mathbf{z}\) captures high-level concepts (e.g., age or skin color), while the sequence of \(\mathbf{x}_t\) progressively adds lower-level details (e.g., hair texture).
           Following previous work, we define the decoder as:
         </p>
-        <pre>
-          \( p_{\theta}(x_{t-1} | x_t, z) = \frac{1}{\sqrt{\alpha_t}}(x_t - (1-\alpha_t) / \sqrt{1-\bar{\alpha}_t} \epsilon_{\theta}(x_{t-1}, t, z)) \)
-        </pre>
-        <p>
-          with a noise prediction network \(\epsilon_{\theta}(x_{t-1}, t, z)\) parameterized by a U-Net.
-        </p>
+        <div style="text-align: center;">
+          \( p_{\theta}(\mathbf{x}_{t-1} | \mathbf{x}_t, \mathbf{z}) = \frac{1}{\sqrt{\alpha_t}}(\mathbf{x}_t - (1-\alpha_t) / \sqrt{1-\bar{\alpha}_t} \epsilon_{\theta}(\mathbf{x}_{t-1}, t, \mathbf{z})) \)
+        </div>
       </div>
     </div>
   </div>
