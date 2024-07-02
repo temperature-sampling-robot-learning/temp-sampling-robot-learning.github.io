@@ -273,6 +273,74 @@
   </div>
   <!--/ Auxiliary-Variable Diffusion Decoder -->
 
+<!-- InfoDiffusion: Regularizing Semantic Latents By Maximizing Mutual Information -->
+<div class="columns is-centered">
+  <div class="column is-full-width">
+    <h2 class="title is-4">InfoDiffusion: Regularizing Semantic Latents By Maximizing Mutual Information</h2>
+    <div class="content has-text-justified">
+      <p>
+        Diffusion models with auxiliary latents face two main risks. First, an expressive decoder \(p_\theta(\mathbf{x}_{t-1}\mid\mathbf{x}_t, \mathbf{z})\) may ignore low-dimensional latents \(\mathbf{z}\) and generate \(\mathbf{x}_{t-1}\) unconditionally. Second, the approximate posterior \(q_\phi(\mathbf{z}\mid\mathbf{x}_0)\) may fail to match the prior \(p(\mathbf{z})\) due to weak prior regularization relative to the reconstruction term. This degrades the quality of both ancestral sampling and latent representations.
+      </p>
+      
+      <h3 class="title is-5">Regularizing Auxiliary-Variable Diffusion</h3>
+      <p>
+        To address these issues, we propose two regularization terms: a mutual information term and a prior regularizer. We call this approach InfoDiffusion.
+      </p>
+      
+      <h4 class="title is-6">Mutual Information Regularization</h4>
+      <p>
+        To ensure the model does not ignore the latents \(\mathbf{z}\), we augment the learning objective with a mutual information term between \(\mathbf{x}_0\) and \(\mathbf{z}\) under \(q_\phi(\mathbf{x}_0, \mathbf{z})\), the joint distribution over observed data \(\mathbf{x}_0\) and latent variables \(\mathbf{z}\). Formally, the mutual information regularizer is defined as:
+      </p>
+      <div style="text-align: center;">
+        \(\mathrm{MI}_{\mathbf{x}_0, \mathbf{z}} = \mathbb{E}_{q_\phi(\mathbf{x}_0, \mathbf{z})}\left[ \log \frac{q_\phi(\mathbf{x}_0, \mathbf{z})}{q(\mathbf{x}_0)q_\phi(\mathbf{z})} \right]\)
+      </div>
+      <p>
+        Here, \(q_\phi(\mathbf{z})\) is the marginal approximate posterior distribution, defined as the marginal of the product \(q_\phi(\mathbf{z}\mid\mathbf{x}_0)q(\mathbf{x}_0)\). Maximizing mutual information encourages the model to generate \(\mathbf{x}_0\) from which \(\mathbf{z}\) can be predicted.
+      </p>
+      
+      <h4 class="title is-6">Prior Regularization</h4>
+      <p>
+        To prevent a degenerate approximate posterior, we regularize the encoded samples \(\mathbf{z}\) to resemble the prior \(p(\mathbf{z})\). The prior regularizer is defined as:
+      </p>
+      <div style="text-align: center;">
+        \(\mathcal{R} = \text{D}(q_\phi(\mathbf{z})\|p(\mathbf{z}))\)
+      </div>
+      <p>
+        where \(\text{D}\) is any strict divergence.
+      </p>
+      
+      <h3 class="title is-5">A Tractable Objective for InfoDiffusion</h3>
+      <p>
+        We train InfoDiffusion by maximizing a regularized ELBO objective:
+      </p>
+      <div style="text-align: center;">
+        \(\mathbb{E}_{q(\mathbf{x}_0)}[\mathcal{L}_D(\mathbf{x}_0)] + \zeta \cdot \mathrm{MI}_{\mathbf{x}_0, \mathbf{z}} - \beta \cdot \mathcal{R}\)
+      </div>
+      <p>
+        where \(\mathcal{L}_D(\mathbf{x}_0)\) is from the denoising objective, and \(\zeta, \beta > 0\) are scalars controlling the regularization strength.
+      </p>
+      <p>
+        Following previous work, we can rewrite this objective into a tractable form:
+      </p>
+      <div style="text-align: center;">
+        \(\mathcal{L}_I = \mathbb{E}_{q(\mathbf{x}_0, \mathbf{x}_1)}\left[\mathbb{E}_{q_{\mathbf{z}}}\left[\log p_{\theta}(\mathbf{x}_0|\mathbf{x}_1, \mathbf{z})\right]\right] - \mathbb{E}_{q(\mathbf{x}_0)}[\mathrm{KL}(q(\mathbf{x}_T | \mathbf{x}_0) \| p(\mathbf{x}_T))]\)
+      </div>
+      <div style="text-align: center;">
+        \(- \sum_{t=2}^{T} \mathbb{E}_{q(\mathbf{x}_0, \mathbf{x}_t)}\left[\mathbb{E}_{q_{\mathbf{z}}} \left[\mathrm{KL}(q(\mathbf{x}_{t-1}|\mathbf{x}_t, \mathbf{x}_0) \| p_{\theta}(\mathbf{x}_{t-1}|\mathbf{x}_t, \mathbf{z}))\right]\right]\)
+      </div>
+      <div style="text-align: center;">
+        \(- (1-\zeta) \mathbb{E}_{q(\mathbf{x}_0)} [\mathrm{KL}(q_\phi(\mathbf{z}\mid\mathbf{x}_0)\|p(\mathbf{z}))] - (\lambda + \zeta-1) \mathrm{KL}(q_\phi(\mathbf{z}) \| p(\mathbf{z}))\)
+      </div>
+      
+      <h3 class="title is-5">Comparing InfoDiffusion to Existing Models</h3>
+      <p>
+        The InfoDiffusion algorithm generalizes several existing methods. When the decoder performs one step of diffusion (\(T=1\)), it is equivalent to the InfoVAE model. Choosing \(\lambda=0\) recovers the \(\beta\)-VAE model. When \(T=1\) and \(\text{D}\) is the Jensen-Shannon divergence, it recovers adversarial auto-encoders (AAEs). InfoDiffusion extends these models to diffusion decoders, similar to how DDPM extends VAEs. When \(\zeta=\lambda=0\), it recovers the DiffAE model.
+      </p>
+    </div>
+  </div>
+</div>
+<!--/ InfoDiffusion: Regularizing Semantic Latents By Maximizing Mutual Information -->
+  
     <!-- Citation -->
     <div class="columns is-centered">
       <div class="column is-full-width">
