@@ -1,7 +1,7 @@
 # LLaVAction
 
 
-This is the repository that contains source code for the [LLaVAction website](https://llavaction.github.io). 
+This is the repository that contains source code for the [LLaVAction website](https://mmathislab.github.io/llavaction/). 
 
 This was adpoted directly from [Nerfies Website](https://nerfies.github.io)
 
