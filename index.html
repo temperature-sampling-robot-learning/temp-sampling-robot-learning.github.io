@@ -70,18 +70,17 @@
             <span class="author-block">
               <a href="https://yeshaokai.github.io/">Shaokai Ye*</a><sup>1</sup>,</span>
             <span class="author-block">
-              <a href="https://people.epfl.ch/haozhe.qi?lang=en">Haozhe Qi*</a><sup>2</sup>,</span>
+              <a href="https://people.epfl.ch/haozhe.qi?lang=en">Haozhe Qi*</a><sup>1</sup>,</span>
             <span class="author-block">
-              <a href="https://mathislab.org/">Alexander Mathis**</a><sup>2</sup>,
+              <a href="https://mathislab.org/">Alexander Mathis**</a><sup>1</sup>,
             </span>
             <span class="author-block">
-              <a href="https://www.mackenziemathislab.org/">Mackenzie Mathis**</a><sup>2</sup>,
+              <a href="https://www.mackenziemathislab.org/">Mackenzie Mathis**</a><sup>1</sup>,
             </span>
           </div>
 
           <div class="is-size-5 publication-authors">
-            <span class="author-block"><sup>1</sup>University of Washington,</span>
-            <span class="author-block"><sup>2</sup>Google Research</span>
+            <span class="author-block"><sup>1</sup>EPFL</span>
           </div>
 
           <div class="column has-text-centered">
@@ -117,7 +116,7 @@
               </span>
               <!-- Code Link. -->
               <span class="link-block">
-                <a href="https://github.com/google/nerfies"
+                <a href="https://github.com/AdaptiveMotorControlLab/LLaVAction"
                    class="external-link button is-normal is-rounded is-dark">
                   <span class="icon">
                       <i class="fab fa-github"></i>
@@ -127,7 +126,7 @@
               </span>
               <!-- Dataset Link. -->
               <span class="link-block">
-                <a href="https://github.com/google/nerfies/releases/tag/0.1"
+                <a href="https://github.com/AdaptiveMotorControlLab/LLaVAction/releases"
                    class="external-link button is-normal is-rounded is-dark">
                   <span class="icon">
                       <i class="far fa-images"></i>
@@ -226,31 +225,20 @@
         <h2 class="title is-3">Abstract</h2>
         <div class="content has-text-justified">
           <p>
-            We present the first method capable of photorealistically reconstructing a non-rigidly
-            deforming scene using photos/videos captured casually from mobile phones.
+            LLaVAction: evaluating and training multi-modal large language models for action recognition
           </p>
           <p>
-            Our approach augments neural radiance fields
-            (NeRF) by optimizing an
-            additional continuous volumetric deformation field that warps each observed point into a
-            canonical 5D NeRF.
-            We observe that these NeRF-like deformation fields are prone to local minima, and
-            propose a coarse-to-fine optimization method for coordinate-based models that allows for
-            more robust optimization.
-            By adapting principles from geometry processing and physical simulation to NeRF-like
-            models, we propose an elastic regularization of the deformation field that further
-            improves robustness.
-          </p>
-          <p>
-            We show that <span class="dnerf">Nerfies</span> can turn casually captured selfie
-            photos/videos into deformable NeRF
-            models that allow for photorealistic renderings of the subject from arbitrary
-            viewpoints, which we dub <i>"nerfies"</i>. We evaluate our method by collecting data
-            using a
-            rig with two mobile phones that take time-synchronized photos, yielding train/validation
-            images of the same pose at different viewpoints. We show that our method faithfully
-            reconstructs non-rigidly deforming scenes and reproduces unseen views with high
-            fidelity.
+            Understanding human behavior requires measuring behavioral actions. Due to its complexity, 
+            behavior is best mapped onto a rich, semantic structure such as language. The recent development
+            of multi-modal large language models (MLLMs) is a promising candidate for a wide range of action
+            understanding tasks. In this work, we focus on evaluating and then improving MLLMs to perform action
+            recognition. We reformulate EPIC-KITCHENS-100, one of the largest and most challenging egocentric 
+            action datasets, to the form of video multiple question answering (EPIC-KITCHENS-100-MQA). We show
+            that when we sample difficult incorrect answers as distractors, leading MLLMs struggle to recognize
+            the correct actions. We propose a series of methods that greatly improve the MLLMs' ability to perform
+            action recognition, achieving state-of-the-art on both the EPIC-KITCHENS-100 Challenge, as well as
+            outperforming GPT-4o by 21 points in accuracy on EPIC-KITCHENS-100-MQA. Lastly, we show improvements
+            on other action-related video benchmarks such as VideoMME, PerceptionTest and MVBench. 
           </p>
         </div>
       </div>
@@ -442,11 +430,11 @@
             Commons Attribution-ShareAlike 4.0 International License</a>.
           </p>
           <p>
-            This means you are free to borrow the <a
-              href="https://github.com/nerfies/nerfies.github.io">source code</a> of this website,
-            we just ask that you link back to this page in the footer.
+            We used the template kindly provided by the <a
+              href="https://github.com/nerfies/nerfies.github.io">source code</a> of this website. 
+            Please link to them in the footer if you adopt this code. 
             Please remember to remove the analytics code included in the header of the website which
-            you do not want on your website.
+            you do not want on your website
           </p>
         </div>
       </div>
