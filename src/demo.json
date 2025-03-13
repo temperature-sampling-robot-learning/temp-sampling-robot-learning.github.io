@@ -1,0 +1,114 @@
+{
+    "P22-P22_01_612.28_613.28": {
+        "gt": "put down down slice",
+        "tim_chatgpt_pred": "remove peel",
+        "llavaction_pred": "put down down slice",
+        "llavaction_options": [
+            "remove peel",
+            "put down down slice",
+            "cut slice",
+            "put buns on plate",
+            "put down lemon peel"
+        ],
+        "open_ended": "peelings, plate",
+        "caption": "In the video frames, I am holding a slice of food, possibly a vegetable or fruit, in my right hand. I move my hand towards a plate on the counter and place the slice down onto it. The sequence of actions is quick, lasting less than a second, and involves a simple motion of putting down the slice from my hand to the plate. The context suggests I am preparing or organizing food items, as there are other slices already on the plate and a peeler nearby, indicating a food preparation process."
+    },
+    "P01-P01_15_850.25_851.5": {
+        "gt": "turn on tap",
+        "tim_chatgpt_pred": "clean sink",
+        "llavaction_pred": "turn on tap",
+        "llavaction_options": [
+            "move tap",
+            "turn tap water off",
+            "turn on tap",
+            "clean sink",
+            "adjust tap"
+        ],
+        "open_ended": "The objects visible in the video are a sponge and a faucet.",
+        "caption": "In the video frames, I am standing at a kitchen sink. My hands are positioned over the sink, and I appear to be reaching towards the tap. The sequence of actions suggests that I am turning on the tap. The movement of my hands towards the tap handle and the context of being at the sink support this action. The video is short, lasting only 1.250 seconds, which aligns with the quick action of turning on a tap."
+    },
+    "P20-P20_06_230.09_232.28": {
+        "gt": "sit on chair",
+        "tim_chatgpt_pred": "move chair",
+        "llavaction_pred": "sit on chair",
+        "llavaction_options": [
+            "move chair",
+            "pick up flour bag",
+            "open bag",
+            "sit on chair",
+            "pick up slice of bread"
+        ],
+        "open_ended": "A loaf of bread, a table with bowls and a can are visible in the video.",
+        "caption": "In the video, I am interacting with a chair in a kitchen setting. Initially, I am holding onto the backrest of a chair, which is positioned near a table with various items on it, such as bowls and a can. As the video progresses, I move the chair closer to the table, indicating that I am repositioning it. The sequence of actions and the focus on the chair suggest that the primary action is moving the chair."
+    },
+    "P22-P22_03_979.7_980.35": {
+        "gt": "close cupboard",
+        "tim_chatgpt_pred": "open cupboard",
+        "llavaction_pred": "close cupboard",
+        "llavaction_options": [
+            "put down washing up liquid",
+            "open tap",
+            "open cupboard",
+            "close cupboard",
+            "place knife"
+        ],
+        "open_ended": "close cupboard",
+        "caption": "In the video frames, I am closing a cupboard door in a kitchen. Initially, the cupboard is open, and my hand is on the handle. As the frames progress, I pull the door towards me, and it gradually closes. By the final frame, the cupboard door is fully closed, indicating the completion of the action. The short duration of the video, 0.350 seconds, supports the quick action of closing the cupboard."
+    },
+    "P01-P01_15_378.51_379.13": {
+        "gt": "take spoon",
+        "tim_chatgpt_pred": "put down knife",
+        "llavaction_pred": "take spoon",
+        "llavaction_options": [
+            "take spoon",
+            "put down spoon",
+            "pick up knife",
+            "put down knife",
+            "pick up fork from sink"
+        ],
+        "open_ended": "cutlery",
+        "caption": "In the video frames, I am in a kitchen setting, standing over a sink. I am holding a spoon in my right hand, and it appears that I am placing it down onto a green cutting board next to other utensils like spatulas. The action is quick, lasting only 0.350 seconds, which suggests a simple task of putting down the spoon after possibly using it for cooking or serving. The context of the kitchen and the presence of other utensils supports the action of putting down the spoon as part of a routine kitchen activity."
+    },
+    "P22-P22_03_321.23_326.12": {
+        "gt": "put down pan",
+        "tim_chatgpt_pred": "put down plate",
+        "llavaction_pred": "put down pan",
+        "llavaction_options": [
+            "turn on tap",
+            "turn off tap",
+            "put down pan",
+            "rinse pan",
+            "put down plate"
+        ],
+        "open_ended": "The objects visible in the video are a pan, a dish rack, and a sink.",
+        "caption": "In the video, I am holding a pan with both hands. Initially, I am near the sink, possibly rinsing or cleaning the pan. As the video progresses, I move the pan towards a dish rack. The final frames show me placing the pan down into the dish rack, indicating that I am putting it down after washing or rinsing it. The sequence of actions and the context of being in a kitchen setting support the action of putting down the pan."
+    },
+    "P22-P22_01_588.49_591.56": {
+        "gt": "remove slice",
+        "tim_chatgpt_pred": "peel peach",
+        "llavaction_pred": "remove slice",
+        "llavaction_options": [
+            "take stuff out of fridge",
+            "remove peel",
+            "remove slice",
+            "cut peach",
+            "peel peach"
+        ],
+        "open_ended": "peelings, knife",
+        "caption": "In the video frames, I am holding a knife and interacting with a blue object that resembles a fruit or vegetable. The sequence of actions suggests that I am removing a slice from the object. Initially, I am seen holding the object firmly in one hand while using the knife in the other hand to cut it. The presence of a plate with similar blue slices indicates that I am in the process of preparing these slices, likely for consumption or presentation. The short duration of the video, 2.150 seconds, supports the action of quickly removing a slice from the object."
+    },
+    "P27-P27_05_367.06_367.81": {
+        "gt": "put down soap",
+        "tim_chatgpt_pred": "rinse sponge",
+        "llavaction_pred": "put down soap",
+        "llavaction_options": [
+            "put spoon",
+            "rinse sponge",
+            "pick up washing liquid",
+            "put knife",
+            "put down soap"
+        ],
+        "open_ended": "The objects visible in the video are a bottle of dish soap and a sponge.",
+        "caption": "In the video frames, I am holding a bottle of dish soap over a sink. My hand is moving the bottle towards the counter, indicating that I am in the process of putting it down. The sequence of frames shows a consistent movement of the bottle from above the sink to a position closer to the counter, suggesting the action of placing it down. The short duration of the video, 0.420 seconds, supports the conclusion that this is a quick action of putting down the soap bottle."
+    }
+}
