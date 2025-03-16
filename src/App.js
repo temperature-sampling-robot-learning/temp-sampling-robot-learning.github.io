@@ -178,7 +178,7 @@ function App() {
       <Hero />
       <Abstract />
       
-      <section className="section">
+      <section className="section" id="demo">
         <div className="container is-max-desktop">
           <div className="columns is-centered">
             <div className="column is-full-width">
@@ -247,42 +247,14 @@ function App() {
       <section className="section" id="BibTeX">
         <div className="container is-max-desktop content">
           <h2 className="title">BibTeX</h2>
-          <pre><code>{`@article{ye2024llavaction,
+          <pre><code>{`@article{YeQi2025llavaction,
   title={LLaVAction: evaluating and training multi-modal large language models for action recognition},
-  author={Ye, Shaokai and Qi, Haozhe and Mathis, Alexander and Mathis, Mackenzie},
+  author={Ye, Shaokai and Qi, Haozhe and Mathis, Alexander and Mathis, Mackenzie W.},
   journal={arXiv preprint},
-  year={2024}
+  year={2025}
 }`}</code></pre>
         </div>
       </section>
-
-      <footer className="footer">
-        <div className="container">
-          <div className="content has-text-centered">
-            <a className="icon-link" href="https://github.com/AdaptiveMotorControlLab/LLaVAction">
-              <i className="fab fa-github"></i>
-            </a>
-          </div>
-          <div className="columns is-centered">
-            <div className="column is-8">
-              <div className="content">
-                <p>
-                  This website is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">
-                    Creative Commons Attribution-ShareAlike 4.0 International License
-                  </a>.
-                </p>
-                <p>
-                  We used the template kindly provided by the <a href="https://github.com/nerfies/nerfies.github.io">
-                    source code
-                  </a> of this website. Please link to them in the footer if you adopt this code.
-                  Please remember to remove the analytics code included in the header of the website which
-                  you do not want on your website.
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </footer>
     </div>
   );
 }

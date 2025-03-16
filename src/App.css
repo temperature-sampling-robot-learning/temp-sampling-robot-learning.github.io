@@ -51,8 +51,8 @@ body {
 .video-container {
   flex: 1;
   min-width: 300px;
-  margin: 0 auto;
-  max-width: 800px;
+  margin: 55px auto 0;
+  max-width: 700px;
 }
 
 .data-container {
@@ -313,10 +313,9 @@ img[src*="llavaction"] {
   padding: 3rem 1.5rem;
 }
 
-.footer {
-  margin-top: 4rem;
-  padding: 3rem 1.5rem;
-  background-color: #f8f9fa;
+/* Add margin to demo section */
+#demo {
+  margin-top: 10px;
 }
 
 /* Responsive adjustments */
@@ -338,4 +337,13 @@ img[src*="llavaction"] {
   .publication-title {
     font-size: 1.75rem !important;
   }
+}
+
+#BibTeX .content {
+  justify-content: flex-start;
+  text-align: left;
+}
+
+#BibTeX pre {
+  text-align: left;
 }
