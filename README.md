@@ -1,14 +1,15 @@
-# Nerfies
+# Sketch2Human: Deep Human Generation with Disentangled Geometry and Appearance Constraints
 
-This is the repository that contains source code for the [Nerfies website](https://nerfies.github.io).
+This is the repository that contains source code for the [sketch2human website](https://sketch2human.github.io).
 
-If you find Nerfies useful for your work please cite:
+If you find Sketch2Human useful for your work please cite:
 ```
-@article{park2021nerfies
-  author    = {Park, Keunhong and Sinha, Utkarsh and Barron, Jonathan T. and Bouaziz, Sofien and Goldman, Dan B and Seitz, Steven M. and Martin-Brualla, Ricardo},
-  title     = {Nerfies: Deformable Neural Radiance Fields},
-  journal   = {ICCV},
-  year      = {2021},
+@article{qu2024sketch2human,
+  title={Sketch2human: Deep human generation with disentangled geometry and appearance constraints},
+  author={Qu, Linzi and Shang, Jiaxiang and Ye, Hui and Han, Xiaoguang and Fu, Hongbo},
+  journal={IEEE Transactions on Visualization and Computer Graphics},
+  year={2024},
+  publisher={IEEE}
 }
 ```
 
