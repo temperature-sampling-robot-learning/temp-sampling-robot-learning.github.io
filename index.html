@@ -10,6 +10,8 @@
     Disentangled Geometry and Appearance Constraints</title>
 
   <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-PYVRSFMDRL"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
@@ -109,15 +111,15 @@
                   <span>arXiv</span>
                 </a>
               </span>
-              <!--<span class="link-block">
-                <a href="https://github.com/linziqu/sketch2human.github.io/tree/main/Supplemental_material"
+              <span class="link-block">
+                <a href="https://drive.google.com/file/d/1e3TmcF962W8tuACarxELBImMomhDJ30D/view?usp=sharing"
                    class="external-link button is-normal is-rounded is-dark">
                   <span class="icon">
                       <i class="fas fa-solid fa-file"></i>
                   </span>
                   <span>Supplemental Material</span>
                 </a>
-              </span>-->
+              </span>
               <!-- Code Link. -->
               <!-- <span class="link-block">
                 <a href="https://github.com/google/nerfies"
@@ -186,10 +188,17 @@
       <div class="column is-four-fifths">
         <h2 class="title is-3">Method</h2>
         <img src="./static/images/framework.jpg" referrerpolicy="no-referrer" alt="Teaser">
-        <h2 class="subtitle has-text-centered">
-          Our Sketch2Human generates high-quality full-body images with respect to an input semantic sketch 
-          for geometry control and a reference image for appearance control. (a), (b), (c), and (d) correspond to four different sketch inputs.
-        </h2>
+        <div class="content has-text-justified">
+          <p>
+          An illustration about the training (right) and inference (left) pipelines of our method for full-body human image generation conditioned on a semantic
+          sketch \(PS_g\) and a reference image \(I_a\). The training pipeline consists of two main modules: Sketch Image Inversion (right-top) and Body Generator Tuning
+          (right-bottom). In the Sketch Image Inversion module, we first sample a latent code \(w_g\) to generate the training triplet (semantic sketch \(PS_g\), parsing map
+          \(P_g\), sketch \(S_g\)). Then, we use these data to train a sketch encoder. In the Body Generator Tuning module, given an appearance code \(w_a\), we also sample a
+          latent code \(w_g\) to prepare the training appearance-transferred \(I_{mix6}\) and geometry-preserved \(I_{mix10}\) samples via style mixing at different layers. Then, we
+          use them to fine-tune the generator \(G(w;\theta^{'})\). During inference, the sketch encoder first embeds \(PS_g\) into a latent code and mixes it with the appearance
+          code derived from \(I_{a}\) to form \(w_{mix8}\). Given \(w_{mix8}\), \(G(w;\theta^{'})\) produces the final result \(I_{syn}\).
+          </p>
+        </div>
       </div>
     </div>
     <!--/ Method. -->
